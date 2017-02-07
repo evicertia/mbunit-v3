@@ -33,9 +33,9 @@
     <Module Include="$(SourceDir)\Extensions\Ambience\Ambience.module">
       <Inherit>true</Inherit>
     </Module>
-    <Module Include="$(SourceDir)\Extensions\AutoCAD\AutoCAD.module">
+    <!-- Module Include="$(SourceDir)\Extensions\AutoCAD\AutoCAD.module">
       <Inherit>true</Inherit>
-    </Module>
+    </Module -->
     <Module Include="$(SourceDir)\Extensions\CCNet\CCNet.module">
       <Inherit>true</Inherit>
     </Module>
@@ -96,7 +96,7 @@
     <Module Include="$(SourceDir)\Extensions\PowerShell\PowerShell.module">
       <Inherit>true</Inherit>
     </Module>
-    <Module Include="$(SourceDir)\Extensions\ReSharper\ReSharper31.module">
+    <!-- Module Include="$(SourceDir)\Extensions\ReSharper\ReSharper31.module">
       <Inherit>true</Inherit>
     </Module>
     <Module Include="$(SourceDir)\Extensions\ReSharper\ReSharper40.module">
@@ -122,7 +122,7 @@
     </Module>
 	<Module Include="$(SourceDir)\Extensions\ReSharper\ReSharper70.module">
       <Inherit>true</Inherit>
-    </Module>
+    </Module -->
     <Module Include="$(SourceDir)\Extensions\RSpec\RSpec.module">
       <Inherit>true</Inherit>
     </Module>

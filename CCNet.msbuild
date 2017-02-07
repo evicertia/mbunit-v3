@@ -27,6 +27,6 @@
                FileVersion=$(FileVersion);
                RootDir=$(RootDir);
                StartDir=$(StartDir)"
-	     Targets="Clean;Compile;Image;Test;Dist" />
+	     Targets="Clean;Compile;Image;Dist" />
   </Target>
 </Project>

@@ -1,0 +1,57 @@
+After proyect migration to Visaul Studio 2015, run tests under Windows throws this exception:
+
+> Libs/Gallio/Gallio.Echo.exe /runtime-version:v4.0.30319 /report-type:Xml /runner:Local WebSite.Tests/bin/Debug/Herma.WebSite.Tests.dll
+
+Gallio Echo - Version 3.4 build 0
+Get the latest version at http://www.gallio.org/
+
+Start time: 19:20
+Initializing the runtime and loading plugins.
+Verifying test files.
+Initializing the test runner.
+Running the tests.
+A fatal exception occurred while running tests.  Possible causes include invalid test runner parameters and stack overflows.
+        Gallio.Model.ModelException: An exception occurred while invoking a test driver. ---> Gallio.Model.ModelException: Microsoft.Cci.Pdb.PdbDebugException: Unknown custom metadata item kind: 7
+           at Microsoft.Cci.Pdb.PdbFunction.ReadCustomMetadata(BitAccess bits)
+           at Microsoft.Cci.Pdb.PdbFunction..ctor(ManProcSym proc, BitAccess bits)
+           at Microsoft.Cci.Pdb.PdbFunction.LoadManagedFunctions(BitAccess bits, UInt32 limit, Boolean readStrings)
+           at Microsoft.Cci.Pdb.PdbFile.LoadFuncsFromDbiModule(BitAccess bits, DbiModuleInfo info, IntHashTable names, ArrayList funcList, Boolean readStrings, MsfDirectory dir, Dictionary`2 nameIndex, PdbReader reader)
+           at Microsoft.Cci.Pdb.PdbFile.LoadFunctions(Stream read, BitAccess bits, Boolean readAllStrings)
+           at Microsoft.Cci.PdbReader..ctor(Stream pdbStream, IMetadataHost host)
+           at Gallio.Common.Reflection.Impl.CciModuleCache.FeedMap()
+           at Gallio.Common.Reflection.Impl.CciDebugSymbolResolver.GetSourceLocationForMethod(String assemblyPath, Int32 methodToken)
+           at Gallio.Common.Reflection.Impl.DebugSymbolUtils.GetSourceLocation(MethodBase method)
+           at Gallio.Common.Reflection.Impl.NativeFunctionWrapper`1.GetCodeLocation()
+           at Gallio.Model.Schema.AnnotationData..ctor(Annotation source)
+           at Gallio.Model.Messages.TestModelSerializer.PublishTestModel(TestModel testModel, IMessageSink messageSink)
+           at Gallio.Model.Helpers.SimpleTestDriver.GenerateTestModel(IReflectionPolicy reflectionPolicy, IEnumerable`1 codeElements, IMessageSink messageSink)
+           at Gallio.Model.Helpers.SimpleTestDriver.RunAssembly(Assembly assembly, TestExplorationOptions testExplorationOptions, TestExecutionOptions testExecutionOptions, IMessageSink messageSink, IProgressMonitor progressMonitor)
+           at Gallio.Model.DotNetTestDriver.ExploreOrRunTask.ExploreOrRun(Type driverType, Object[] driverArguments, String assemblyPath, TestExplorationOptions testExplorationOptions, TestExecutionOptions testExecutionOptions, IMessageSink messageSink, IProgressMonitor progressMonitor)
+           at Gallio.Model.DotNetTestDriver.ExploreOrRunTask.RunImpl(Object[] args)
+           at Gallio.Model.Isolation.IsolatedTask.Run(Object[] args) ---> Microsoft.Cci.Pdb.PdbDebugException: Unknown custom metadata item kind: 7
+        HResult: -2146232800
+           at Microsoft.Cci.Pdb.PdbFunction.ReadCustomMetadata(BitAccess bits)
+           at Microsoft.Cci.Pdb.PdbFunction..ctor(ManProcSym proc, BitAccess bits)
+           at Microsoft.Cci.Pdb.PdbFunction.LoadManagedFunctions(BitAccess bits, UInt32 limit, Boolean readStrings)
+           at Microsoft.Cci.Pdb.PdbFile.LoadFuncsFromDbiModule(BitAccess bits, DbiModuleInfo info, IntHashTable names, ArrayList funcList, Boolean readStrings, MsfDirectory dir, Dictionary`2 nameIndex, PdbReader reader)
+           at Microsoft.Cci.Pdb.PdbFile.LoadFunctions(Stream read, BitAccess bits, Boolean readAllStrings)
+           at Microsoft.Cci.PdbReader..ctor(Stream pdbStream, IMetadataHost host)
+           at Gallio.Common.Reflection.Impl.CciModuleCache.FeedMap()
+           at Gallio.Common.Reflection.Impl.CciDebugSymbolResolver.GetSourceLocationForMethod(String assemblyPath, Int32 methodToken)
+           at Gallio.Common.Reflection.Impl.DebugSymbolUtils.GetSourceLocation(MethodBase method)
+           at Gallio.Common.Reflection.Impl.NativeFunctionWrapper`1.GetCodeLocation()
+           at Gallio.Model.Schema.AnnotationData..ctor(Annotation source)
+           at Gallio.Model.Messages.TestModelSerializer.PublishTestModel(TestModel testModel, IMessageSink messageSink)
+           at Gallio.Model.Helpers.SimpleTestDriver.GenerateTestModel(IReflectionPolicy reflectionPolicy, IEnumerable`1 codeElements, IMessageSink messageSink)
+           at Gallio.Model.Helpers.SimpleTestDriver.RunAssembly(Assembly assembly, TestExplorationOptions testExplorationOptions, TestExecutionOptions testExecutionOptions, IMessageSink messageSink, IProgressMonitor progressMonitor)
+           at Gallio.Model.DotNetTestDriver.ExploreOrRunTask.ExploreOrRun(Type driverType, Object[] driverArguments, String assemblyPath, TestExplorationOptions testExplorationOptions, TestExecutionOptions testExecutionOptions, IMessageSink messageSink, IProgressMonitor progressMonitor)
+           at Gallio.Model.DotNetTestDriver.ExploreOrRunTask.RunImpl(Object[] args)
+           at Gallio.Model.Isolation.IsolatedTask.Run(Object[] args)
+           --- End of inner exception stack trace ---
+        HResult: -2146233088
+
+
+The cause was the changes on pdbs Metadata Information. When ReadCustomMetadata function try to read, throw and error on version valdiation.
+
+The fix was download Microsoft.Cci.Metadata: https://www.nuget.org/packages/CustomMetadataFix.Microsoft.Cci.Metadata/, apply the patch to avoid validation version and recompile Solution to generate new dlls with PDB's created with MsBuild 14.0 tools.
+

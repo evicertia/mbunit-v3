@@ -4,180 +4,6 @@
         <name>Microsoft.Cci.SourceModel</name>
     </assembly>
     <members>
-        <member name="T:Microsoft.Cci.AggregatingSourceLocationProvider">
-            <summary>
-            A provider that aggregates a set of providers in order to
-            map offsets in an IL stream to source locations.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Cci.ISourceLocationProvider">
-            <summary>
-            An object that can map some kinds of ILocation objects to IPrimarySourceLocation objects. 
-            For example, a PDB reader that maps offsets in an IL stream to source locations.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.ISourceLocationProvider.GetPrimarySourceLocationsFor(System.Collections.Generic.IEnumerable{Microsoft.Cci.ILocation})">
-            <summary>
-            Return zero or more locations in primary source documents that correspond to one or more of the given derived (non primary) document locations.
-            </summary>
-            <param name="locations">Zero or more locations in documents that have been derived from one or more source documents.</param>
-        </member>
-        <member name="M:Microsoft.Cci.ISourceLocationProvider.GetPrimarySourceLocationsFor(Microsoft.Cci.ILocation)">
-            <summary>
-            Return zero or more locations in primary source documents that correspond to the given derived (non primary) document location.
-            </summary>
-            <param name="location">A location in a document that have been derived from one or more source documents.</param>
-        </member>
-        <member name="M:Microsoft.Cci.ISourceLocationProvider.GetPrimarySourceLocationsForDefinitionOf(Microsoft.Cci.ILocalDefinition)">
-            <summary>
-            Return zero or more locations in primary source documents that correspond to the definition of the given local.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.ISourceLocationProvider.GetSourceNameFor(Microsoft.Cci.ILocalDefinition,System.Boolean@)">
-            <summary>
-            Returns the source name of the given local definition, if this is available. 
-            Otherwise returns the value of the Name property and sets isCompilerGenerated to true.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.AggregatingSourceLocationProvider.#ctor(System.Collections.Generic.Dictionary{Microsoft.Cci.IUnit,Microsoft.Cci.ISourceLocationProvider})">
-            <summary>
-            Copies the contents of the table
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.AggregatingSourceLocationProvider.GetPrimarySourceLocationsFor(System.Collections.Generic.IEnumerable{Microsoft.Cci.ILocation})">
-            <summary>
-            Return zero or more locations in primary source documents that correspond to one or more of the given derived (non primary) document locations.
-            </summary>
-            <param name="locations">Zero or more locations in documents that have been derived from one or more source documents.</param>
-        </member>
-        <member name="M:Microsoft.Cci.AggregatingSourceLocationProvider.GetPrimarySourceLocationsFor(Microsoft.Cci.ILocation)">
-            <summary>
-            Return zero or more locations in primary source documents that correspond to the given derived (non primary) document location.
-            </summary>
-            <param name="location">A location in a document that have been derived from one or more source documents.</param>
-        </member>
-        <member name="M:Microsoft.Cci.AggregatingSourceLocationProvider.GetPrimarySourceLocationsForDefinitionOf(Microsoft.Cci.ILocalDefinition)">
-            <summary>
-            Return zero or more locations in primary source documents that correspond to the definition of the given local.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.AggregatingSourceLocationProvider.GetSourceNameFor(Microsoft.Cci.ILocalDefinition,System.Boolean@)">
-            <summary>
-            Returns the source name of the given local definition, if this is available.
-            Otherwise returns the value of the Name property and sets isCompilerGenerated to true.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.AggregatingSourceLocationProvider.Dispose">
-            <summary>
-            Disposes all aggregated providers.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.AggregatingSourceLocationProvider.Finalize">
-            <summary>
-            Disposes all aggregated providers that implement the IDisposable interface. 
-            </summary>
-        </member>
-        <member name="T:Microsoft.Cci.AggregatingLocalScopeProvider">
-            <summary>
-            A provider that aggregates a set of providers in order to
-            map offsets in an IL stream to block scopes.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Cci.ILocalScopeProvider">
-            <summary>
-            An object that can provide information about the local scopes of a method.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.ILocalScopeProvider.GetIteratorScopes(Microsoft.Cci.IMethodBody)">
-            <summary>
-            Returns zero or more local (block) scopes, each defining an IL range in which an iterator local is defined.
-            The scopes are returned by the MoveNext method of the object returned by the iterator method.
-            The index of the scope corresponds to the index of the local. Specifically local scope i corresponds
-            to the local stored in field &lt;localName&gt;x_i of the class used to store the local values in between
-            calls to MoveNext.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.ILocalScopeProvider.GetLocalScopes(Microsoft.Cci.IMethodBody)">
-            <summary>
-            Returns zero or more local (block) scopes into which the CLR IL operations in the given method body is organized.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.ILocalScopeProvider.GetNamespaceScopes(Microsoft.Cci.IMethodBody)">
-            <summary>
-            Returns zero or more namespace scopes into which the namespace type containing the given method body has been nested.
-            These scopes determine how simple names are looked up inside the method body. There is a separate scope for each dotted
-            component in the namespace type name. For istance namespace type x.y.z will have two namespace scopes, the first is for the x and the second
-            is for the y.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.ILocalScopeProvider.GetConstantsInScope(Microsoft.Cci.ILocalScope)">
-            <summary>
-            Returns zero or more local constant definitions that are local to the given scope.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.ILocalScopeProvider.GetVariablesInScope(Microsoft.Cci.ILocalScope)">
-            <summary>
-            Returns zero or more local variable definitions that are local to the given scope.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.ILocalScopeProvider.IsIterator(Microsoft.Cci.IMethodBody)">
-            <summary>
-            Returns true if the method body is an iterator.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.AggregatingLocalScopeProvider.#ctor(System.Collections.Generic.Dictionary{Microsoft.Cci.IUnit,Microsoft.Cci.ILocalScopeProvider})">
-            <summary>
-            Copies the contents of the table
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.AggregatingLocalScopeProvider.GetIteratorScopes(Microsoft.Cci.IMethodBody)">
-            <summary>
-            Returns zero or more local (block) scopes, each defining an IL range in which an iterator local is defined.
-            The scopes are returned by the MoveNext method of the object returned by the iterator method.
-            The index of the scope corresponds to the index of the local. Specifically local scope i corresponds
-            to the local stored in field &lt;localName&gt;x_i of the class used to store the local values in between
-            calls to MoveNext.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.AggregatingLocalScopeProvider.GetLocalScopes(Microsoft.Cci.IMethodBody)">
-            <summary>
-            Returns zero or more local (block) scopes into which the CLR IL operations in the given method body is organized.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.AggregatingLocalScopeProvider.GetNamespaceScopes(Microsoft.Cci.IMethodBody)">
-            <summary>
-            Returns zero or more namespace scopes into which the namespace type containing the given method body has been nested.
-            These scopes determine how simple names are looked up inside the method body. There is a separate scope for each dotted
-            component in the namespace type name. For istance namespace type x.y.z will have two namespace scopes, the first is for the x and the second
-            is for the y.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.AggregatingLocalScopeProvider.GetConstantsInScope(Microsoft.Cci.ILocalScope)">
-            <summary>
-            Returns zero or more local constant definitions that are local to the given scope.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.AggregatingLocalScopeProvider.GetVariablesInScope(Microsoft.Cci.ILocalScope)">
-            <summary>
-            Returns zero or more local variable definitions that are local to the given scope.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.AggregatingLocalScopeProvider.IsIterator(Microsoft.Cci.IMethodBody)">
-            <summary>
-            Returns true if the method body is an iterator.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.AggregatingLocalScopeProvider.Dispose">
-            <summary>
-            Calls Dispose on all aggregated providers.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Cci.AggregatingLocalScopeProvider.Finalize">
-            <summary>
-            Finalizer for the aggregrating local scope provider. Calls Dispose on
-            all aggregated providers.
-            </summary>
-        </member>
         <member name="T:Microsoft.Cci.ICompilation">
             <summary>
             The root of an AST that represents the inputs, options and output of a compilation.
@@ -1762,6 +1588,35 @@
             Interface implemented by providers of syntax (parse) errors.
             </summary>
         </member>
+        <member name="T:Microsoft.Cci.ISourceLocationProvider">
+            <summary>
+            An object that can map some kinds of ILocation objects to IPrimarySourceLocation objects. 
+            For example, a PDB reader that maps offsets in an IL stream to source locations.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.ISourceLocationProvider.GetPrimarySourceLocationsFor(System.Collections.Generic.IEnumerable{Microsoft.Cci.ILocation})">
+            <summary>
+            Return zero or more locations in primary source documents that correspond to one or more of the given derived (non primary) document locations.
+            </summary>
+            <param name="locations">Zero or more locations in documents that have been derived from one or more source documents.</param>
+        </member>
+        <member name="M:Microsoft.Cci.ISourceLocationProvider.GetPrimarySourceLocationsFor(Microsoft.Cci.ILocation)">
+            <summary>
+            Return zero or more locations in primary source documents that correspond to the given derived (non primary) document location.
+            </summary>
+            <param name="location">A location in a document that have been derived from one or more source documents.</param>
+        </member>
+        <member name="M:Microsoft.Cci.ISourceLocationProvider.GetPrimarySourceLocationsForDefinitionOf(Microsoft.Cci.ILocalDefinition)">
+            <summary>
+            Return zero or more locations in primary source documents that correspond to the definition of the given local.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.ISourceLocationProvider.GetSourceNameFor(Microsoft.Cci.ILocalDefinition,System.Boolean@)">
+            <summary>
+            Returns the source name of the given local definition, if this is available. 
+            Otherwise returns the value of the Name property and sets isCompilerGenerated to true.
+            </summary>
+        </member>
         <member name="T:Microsoft.Cci.ILocalScope">
             <summary>
             A range of CLR IL operations that comprise a lexical scope, specified as an IL offset and a length.
@@ -1780,6 +1635,48 @@
         <member name="P:Microsoft.Cci.ILocalScope.MethodDefinition">
             <summary>
             The definition of the method in which this local scope is defined.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Cci.ILocalScopeProvider">
+            <summary>
+            An object that can provide information about the local scopes of a method.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.ILocalScopeProvider.GetIteratorScopes(Microsoft.Cci.IMethodBody)">
+            <summary>
+            Returns zero or more local (block) scopes, each defining an IL range in which an iterator local is defined.
+            The scopes are returned by the MoveNext method of the object returned by the iterator method.
+            The index of the scope corresponds to the index of the local. Specifically local scope i corresponds
+            to the local stored in field &lt;localName&gt;x_i of the class used to store the local values in between
+            calls to MoveNext.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.ILocalScopeProvider.GetLocalScopes(Microsoft.Cci.IMethodBody)">
+            <summary>
+            Returns zero or more local (block) scopes into which the CLR IL operations in the given method body is organized.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.ILocalScopeProvider.GetNamespaceScopes(Microsoft.Cci.IMethodBody)">
+            <summary>
+            Returns zero or more namespace scopes into which the namespace type containing the given method body has been nested.
+            These scopes determine how simple names are looked up inside the method body. There is a separate scope for each dotted
+            component in the namespace type name. For istance namespace type x.y.z will have two namespace scopes, the first is for the x and the second
+            is for the y.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.ILocalScopeProvider.GetConstantsInScope(Microsoft.Cci.ILocalScope)">
+            <summary>
+            Returns zero or more local constant definitions that are local to the given scope.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.ILocalScopeProvider.GetVariablesInScope(Microsoft.Cci.ILocalScope)">
+            <summary>
+            Returns zero or more local variable definitions that are local to the given scope.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.ILocalScopeProvider.IsIterator(Microsoft.Cci.IMethodBody)">
+            <summary>
+            Returns true if the method body is an iterator.
             </summary>
         </member>
         <member name="T:Microsoft.Cci.INamespaceScope">
@@ -1821,6 +1718,109 @@
         <member name="P:Microsoft.Cci.SourceEditEventArgs.Edits">
             <summary>
             A list of edits to source documents that have occurred as a single event.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Cci.AggregatingSourceLocationProvider">
+            <summary>
+            A provider that aggregates a set of providers in order to
+            map offsets in an IL stream to source locations.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.AggregatingSourceLocationProvider.#ctor(System.Collections.Generic.Dictionary{Microsoft.Cci.IUnit,Microsoft.Cci.ISourceLocationProvider})">
+            <summary>
+            Copies the contents of the table
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.AggregatingSourceLocationProvider.GetPrimarySourceLocationsFor(System.Collections.Generic.IEnumerable{Microsoft.Cci.ILocation})">
+            <summary>
+            Return zero or more locations in primary source documents that correspond to one or more of the given derived (non primary) document locations.
+            </summary>
+            <param name="locations">Zero or more locations in documents that have been derived from one or more source documents.</param>
+        </member>
+        <member name="M:Microsoft.Cci.AggregatingSourceLocationProvider.GetPrimarySourceLocationsFor(Microsoft.Cci.ILocation)">
+            <summary>
+            Return zero or more locations in primary source documents that correspond to the given derived (non primary) document location.
+            </summary>
+            <param name="location">A location in a document that have been derived from one or more source documents.</param>
+        </member>
+        <member name="M:Microsoft.Cci.AggregatingSourceLocationProvider.GetPrimarySourceLocationsForDefinitionOf(Microsoft.Cci.ILocalDefinition)">
+            <summary>
+            Return zero or more locations in primary source documents that correspond to the definition of the given local.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.AggregatingSourceLocationProvider.GetSourceNameFor(Microsoft.Cci.ILocalDefinition,System.Boolean@)">
+            <summary>
+            Returns the source name of the given local definition, if this is available.
+            Otherwise returns the value of the Name property and sets isCompilerGenerated to true.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.AggregatingSourceLocationProvider.Dispose">
+            <summary>
+            Disposes all aggregated providers.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.AggregatingSourceLocationProvider.Finalize">
+            <summary>
+            Disposes all aggregated providers that implement the IDisposable interface. 
+            </summary>
+        </member>
+        <member name="T:Microsoft.Cci.AggregatingLocalScopeProvider">
+            <summary>
+            A provider that aggregates a set of providers in order to
+            map offsets in an IL stream to block scopes.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.AggregatingLocalScopeProvider.#ctor(System.Collections.Generic.Dictionary{Microsoft.Cci.IUnit,Microsoft.Cci.ILocalScopeProvider})">
+            <summary>
+            Copies the contents of the table
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.AggregatingLocalScopeProvider.GetIteratorScopes(Microsoft.Cci.IMethodBody)">
+            <summary>
+            Returns zero or more local (block) scopes, each defining an IL range in which an iterator local is defined.
+            The scopes are returned by the MoveNext method of the object returned by the iterator method.
+            The index of the scope corresponds to the index of the local. Specifically local scope i corresponds
+            to the local stored in field &lt;localName&gt;x_i of the class used to store the local values in between
+            calls to MoveNext.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.AggregatingLocalScopeProvider.GetLocalScopes(Microsoft.Cci.IMethodBody)">
+            <summary>
+            Returns zero or more local (block) scopes into which the CLR IL operations in the given method body is organized.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.AggregatingLocalScopeProvider.GetNamespaceScopes(Microsoft.Cci.IMethodBody)">
+            <summary>
+            Returns zero or more namespace scopes into which the namespace type containing the given method body has been nested.
+            These scopes determine how simple names are looked up inside the method body. There is a separate scope for each dotted
+            component in the namespace type name. For istance namespace type x.y.z will have two namespace scopes, the first is for the x and the second
+            is for the y.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.AggregatingLocalScopeProvider.GetConstantsInScope(Microsoft.Cci.ILocalScope)">
+            <summary>
+            Returns zero or more local constant definitions that are local to the given scope.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.AggregatingLocalScopeProvider.GetVariablesInScope(Microsoft.Cci.ILocalScope)">
+            <summary>
+            Returns zero or more local variable definitions that are local to the given scope.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.AggregatingLocalScopeProvider.IsIterator(Microsoft.Cci.IMethodBody)">
+            <summary>
+            Returns true if the method body is an iterator.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.AggregatingLocalScopeProvider.Dispose">
+            <summary>
+            Calls Dispose on all aggregated providers.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Cci.AggregatingLocalScopeProvider.Finalize">
+            <summary>
+            Finalizer for the aggregrating local scope provider. Calls Dispose on
+            all aggregated providers.
             </summary>
         </member>
     </members>

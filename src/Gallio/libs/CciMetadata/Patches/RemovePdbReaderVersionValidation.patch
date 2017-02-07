@@ -1,0 +1,32 @@
+--- Sources/PdbReader/PdbFunction.cs.orig	2017-02-07 17:06:33.884652300 +0100
++++ Sources/PdbReader/PdbFunction.cs	2017-02-07 19:23:43.000000000 +0100
+@@ -339,21 +339,19 @@
+       int savedPosition = bits.Position;
+       byte version;
+       bits.ReadUInt8(out version);
+-      if (version != 4) {
+-        throw new PdbDebugException("Unknown custom metadata item version: {0}", version);
+-      }
+       byte kind;
+       bits.ReadUInt8(out kind);
+       bits.Align(4);
+       uint numberOfBytesInItem;
+       bits.ReadUInt32(out numberOfBytesInItem);
+-      switch (kind) {
+-        case 0: this.ReadUsingInfo(bits); break;
+-        case 1: break; // this.ReadForwardInfo(bits); break;
+-        case 2: break; // this.ReadForwardedToModuleInfo(bits); break;
+-        case 3: this.ReadIteratorLocals(bits); break;
+-        case 4: this.ReadForwardIterator(bits); break;
+-        default: throw new PdbDebugException("Unknown custom metadata item kind: {0}", kind);
++      if (version == 4) {
++        switch (kind) {
++          case 0: this.ReadUsingInfo(bits); break;
++          case 1: break; // this.ReadForwardInfo(bits); break;
++          case 2: break; // this.ReadForwardedToModuleInfo(bits); break;
++          case 3: this.ReadIteratorLocals(bits); break;
++          case 4: this.ReadForwardIterator(bits); break;
++        }
+       }
+       bits.Position = savedPosition+(int)numberOfBytesInItem;
+     }
